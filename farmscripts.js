@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const balanceElement = document.getElementById('balance');
     const farmProgressElement = document.getElementById('farmProgress');
+    const farmRateElement = document.querySelector('.farm-rate');
     const claimButton = document.getElementById('claimButton');
     const gifButton = document.getElementById('gifButton');
     const boostButton = document.getElementById('boostButton');
@@ -14,17 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let farmingProgress = parseFloat(localStorage.getItem('farmingProgress')) || 0.0000;
     let lastUpdateTime = parseFloat(localStorage.getItem('lastUpdateTime')) || Date.now();
     let farmingInterval;
+    let miningPower = parseFloat(localStorage.getItem('miningPower')) || 1.0; // Начальная мощность майнинга 1.0 GH/s
 
-    const farmingAmountPerSecond = 0.0001;
     const maxFarmingProgress = 10.0000;
 
     function startFarming() {
         farmingInterval = setInterval(() => {
             const currentTime = Date.now();
-            const elapsedTime = (currentTime - lastUpdateTime) / 200;
+            const elapsedTime = (currentTime - lastUpdateTime) / 1000; // Переводим в секунды
             lastUpdateTime = currentTime;
 
-            const earnedAmount = farmingAmountPerSecond * elapsedTime;
+            const earnedAmount = (miningPower * 0.0001) * elapsedTime;
             farmingProgress += earnedAmount;
 
             if (farmingProgress >= maxFarmingProgress) {
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('farmingProgress', farmingProgress.toFixed(4));
         localStorage.setItem('lastUpdateTime', lastUpdateTime.toString());
         localStorage.setItem('balance', balance.toFixed(4));
+        localStorage.setItem('miningPower', miningPower.toFixed(1)); // Сохраняем мощность майнинга
     }
 
     claimButton.addEventListener('click', () => {
@@ -86,10 +88,21 @@ document.addEventListener('DOMContentLoaded', () => {
     modalAddButton.addEventListener('click', () => {
         const trxValue = parseFloat(trxInput.value);
         if (trxValue < 100) {
-            alert('Minimum amount is 100 TRX.');
+            alert('Минимальная сумма - 100 TRX.');
+        } else if (balance < trxValue) {
+            alert('Недостаточно средств на балансе.');
         } else {
-            // Здесь можно добавить функциональность для обработки введенного значения
-            alert(`You have entered ${trxValue} TRX.`);
+            balance -= trxValue;
+            miningPower += trxValue * 0.1;
+            modalMiningPowerValue.textContent = miningPower.toFixed(1) + ' GH/s';
+            balanceElement.textContent = balance.toFixed(4) + ' TRX';
+            alert(`Вы ввели ${trxValue} TRX. Ваша новая мощность майнинга: ${miningPower.toFixed(1)} GH/s.`);
+            boostModal.style.display = 'none';
+
+            saveDataToLocalStorage();
+
+            // Обновляем скорость фарминга при изменении мощности
+            farmRateElement.textContent = miningPower.toFixed(1) + ' GH/s ⚡';
         }
     });
 
@@ -104,6 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         balanceElement.textContent = balance.toFixed(4) + " TRX";
         farmProgressElement.textContent = farmingProgress.toFixed(4) + " TRX";
+        modalMiningPowerValue.textContent = miningPower.toFixed(1) + ' GH/s';
+        farmRateElement.textContent = miningPower.toFixed(1) + ' GH/s ⚡';
         updateClaimButton();
     }
 });
