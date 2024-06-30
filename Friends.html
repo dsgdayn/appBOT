@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .balance-container {
+            padding: 20px;
+            text-align: left;
+            margin-bottom: -40px;
+        }
+        .balance {
+            font-size: 20px;
+            margin-bottom: 10px;
+            border: 2px solid #444;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+        .balance .invite-label {
+            font-size: 16px;
+            margin-bottom: 3px;
+            margin-top: 4px;
+        }
+        .invite-container {
+            display: flex;
+            align-items: center;
+        }
+        .invite-link {
+            word-break: break-all;
+            flex-grow: 1;
+            padding-right: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 5px 10px;
+            background-color: #222;
+            color: #fff;
+        }
+        .copy-button {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .menu-item {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+        .invite-info {
+            font-size: 14px;
+            margin-left: 300px;
+            margin-top: -28px;
+        }
+        .transaction-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+        .name{
+            margin-left: 20px;
+            margin-right: -30px;
+        }
+        .reward{
+            margin-left: -20px;
+        }
+        .Bonus{
+            margin-right: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="balance-container">
+        <div class="balance">
+            <p style="font-size: 12px">Invite friends and receive 250 SHIB for every friend registration. You can also receive bonuses for completed missions by your friends.</p>
+        </div>
+    </div>
+
+    <div class="balance-container">
+        <div class="balance">
+            <p class="invite-label"><strong>Your Invite Link:</strong></p>
+            <div class="invite-container">
+                <input type="text" id="referral-link" class="invite-link" readonly>
+                <button class="copy-button" onclick="copyReferralLink()">⎙</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="balance-container">
+        <div class="balance">
+            <p style="font-size: 12px">Your inviter:</p>
+            <div class="invite-container">
+                <p class="invite-info">@username</p>
+            </div>
+        </div>
+    </div>
+    <div class="transaction-header">
+        <div class="name">Name</div>
+        <div class="missions">Missions</div>
+        <div class="reward">Rewards</div>
+        <div class="Bonus">Bonus</div>
+
+    <nav class="bottom-menu">
+        <a href="Home.html" class="menu-item">Home</a>
+        <a href="Wallet.html" class="menu-item">Wallet</a>
+        <a href="Friends.html" class="menu-item">Friends</a>
+        <a href="Missions.html" class="menu-item">Missions</a>
+    </nav>
+
+    <script src="ref-link.js"></script>
+</body>
+</html>

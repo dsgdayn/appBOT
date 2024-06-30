@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .menu-item {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+        .mission-text {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+        }
+        .mission-text1 {
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
+        .balance-container {
+            padding: 20px;
+            text-align: left;
+            margin-bottom: -25px;
+        }
+        .balance {
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            border: 2px solid #444;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #333;
+        }
+        .balance-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        .balance-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .balance-title {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .balance-value {
+            font-size: 18px;
+        }
+        .mission-button {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .mission-button1 {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .mission-button2 {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .mission-button3 {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .mission-button4 {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .hidden-balance {
+            display: none;
+        }
+        .completed {
+            background-color: #222;
+            color: #bbb;
+        }
+        .completed .balance-value {
+            color: #bbb;
+        }
+        .completed .mission-button,
+        .completed .mission-button1,
+        .completed .mission-button2,
+        .completed .mission-button3,
+        .completed .mission-button4 {
+            background-color: #444;
+            color: #bbb;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+<div class="mission-text1"><strong>5 missions available</strong></div>
+<div class="mission-text"><strong>Complete the missions to get the SHIB</strong></div>
+<div class="balance-container">
+    <div class="balance" id="balance1">
+        <img src="assets/good-bye.png" alt="Tron Logo" class="balance-logo">
+        <div class="balance-info">
+            <span class="balance-title" style="font-size: 12px">Welcome bonus</span>
+            <span class="balance-value" style="font-size: 12px">20,000 SHIB</span>
+        </div>
+        <button id="sendButton" class="mission-button">Send</button>
+    </div>
+    <div class="balance" id="balance2">
+        <img src="assets/chat.png" alt="Tron Logo" class="balance-logo">
+        <div class="balance-info">
+            <span class="balance-title" style="font-size: 12px">Join Tronix community</span>
+            <span class="balance-value" style="font-size: 12px">10,000 SHIB</span>
+        </div>
+        <button id="sendButton1" class="mission-button1">Send</button>
+    </div>
+    <div class="balance" id="balance3">
+        <img src="assets/megaphone.png" alt="Tron Logo" class="balance-logo">
+        <div class="balance-info">
+            <span class="balance-title" style="font-size: 12px">Subscribe to Tronix announcements</span>
+            <span class="balance-value" style="font-size: 12px">10,000 SHIB</span>
+        </div>
+        <button id="sendButton2" class="mission-button2">Send</button>
+    </div>
+    <div class="balance" id="balance4">
+        <img src="assets/avatar.png" alt="Tron Logo" class="balance-logo">
+        <div class="balance-info">
+            <span class="balance-title" style="font-size: 12px">Invite your first friend</span>
+            <span class="balance-value" style="font-size: 12px">10,000 SHIB</span>
+        </div>
+        <button id="sendButton3" class="mission-button3">Send</button>
+    </div>
+    <div class="balance" id="balance5">
+        <img src="assets/lightning.png" alt="Tron Logo" class="balance-logo">
+        <div class="balance-info">
+            <span class="balance-title" style="font-size: 12px">Rent your first power booster</span>
+            <span class="balance-value" style="font-size: 12px">200,000 SHIB</span>
+        </div>
+        <button id="sendButton4" class="mission-button4">Send</button>
+    </div>
+</div>
+
+<nav class="bottom-menu">
+    <a href="Home.html" class="menu-item">Home</a>
+    <a href="Wallet.html" class="menu-item">Wallet</a>
+    <a href="Friends.html" class="menu-item">Friends</a>
+    <a href="Missions.html" class="menu-item">Missions</a>
+</nav>
+
+<script>
+    // Функция для сохранения выполненных заданий в локальное хранилище
+    function saveCompletedMission(id) {
+        localStorage.setItem(id, 'completed');
+    }
+    // Функция для проверки выполненного задания
+    function isMissionCompleted(id) {
+        return localStorage.getItem(id) === 'completed';
+    }
+    // Функция для добавления SHIB и обновления визуального состояния
+    function addSHIB(amount, buttonId, balanceId) {
+        const farmTextElement = document.getElementById('farmText');
+        let currentSHIB = parseFloat(farmTextElement.textContent.replace(' SHIB', '').replace(',', ''));
+        currentSHIB += amount;
+        const newSHIB = currentSHIB.toFixed(4) + ' SHIB';
+        farmTextElement.textContent = newSHIB;
+        updateFarmText(newSHIB);
+
+        const button = document.getElementById(buttonId);
+        const balance = document.getElementById(balanceId);
+        button.innerHTML = '✓';
+        balance.classList.add('completed');
+        button.disabled = true;
+
+        saveCompletedMission(balanceId);
+    }
+    // Функция для загрузки состояния выполненных заданий при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+        const missions = ['balance1', 'balance2', 'balance3', 'balance4', 'balance5'];
+        missions.forEach(id => {
+            if (isMissionCompleted(id)) {
+                const balance = document.getElementById(id);
+                const button = balance.querySelector('button');
+                balance.classList.add('completed');
+                button.innerHTML = '✓';
+                button.disabled = true;
+            }
+        });
+        // Загрузка текущего SHIB из localStorage
+        const farmTextElement = document.getElementById('farmText');
+        const farmText = localStorage.getItem('farmText') || '0.0000 SHIB';
+        farmTextElement.textContent = farmText;
+    });
+    // Обновление значения SHIB в localStorage
+    function updateFarmText(farmText) {
+        localStorage.setItem('farmText', farmText);
+    }
+    // Добавление SHIB при нажатии на кнопки
+    document.getElementById('sendButton').addEventListener('click', function() {
+        addSHIB(20000, 'sendButton', 'balance1');
+    });
+</script>
+    <div class="hidden-balance">
+        <div class="balance">
+            <div class="balance-info">
+                <span class="balance-title" style="font-size: 12px">Total SHIB</span>
+                <span id="farmText" class="balance-value" style="font-size: 12px">0.0000 SHIB</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
